@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obajuwon’s Portfolio</title>
+
+    <style>
+        /* General Styles */
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #1e90ff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+            border-bottom: 2px solid #1e90ff;
+            padding-bottom: 5px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        img.profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 20px auto;
+            object-fit: cover;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* Buttons */
+        .card button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 5px 0 0;
+        }
+
+        .card button:hover {
+            background-color: #0b5ed7;
+        }
+
+        /* Links */
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .card {
+                padding: 15px;
+            }
+            img.profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        /* Fade-in animation */
+body {
+    animation: fadeIn 1.2s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Card slide-up animation */
+
+        .card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    /* animation setup */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+/* when card becomes visible */
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+    }
+}
+.card button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <h1>Welcome to Obajuwon’s Portfolio</h1>
+
+        <!-- Profile Image -->
+        <img src="me.jpg" alt="My Photo" class="profile-pic">
+
+        <!-- About Me -->
+        <div class="card">
+            <h2>About Me</h2>
+            <p>
+                I am an SS2 student from Akure, Ondo State learning technology and web development.
+                I want to build websites, code, and create content online.
+            </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="card">
+            <h2>Skills</h2>
+            <button id="toggleSkillsBtn">Show/Hide Skills</button>
+            <ul>
+                <li>HTML & CSS</li>
+                <li>JavaScript (beginner)</li>
+                <li>Video Editing (Shotcut)</li>
+                <li>Basic Website Design</li>
+            </ul>
+        </div>
+
+        <!-- Projects -->
+        <div class="card">
+            <h2>Projects</h2>
+            <ul>
+                <li>First Website (this portfolio)</li>
+                <li>Sample Minecraft video edit</li>
+                <li>School computer project website</li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="card">
+            <h2>Contact Me</h2>
+            <button id="contactBtn">Email Me</button>
+            <button onclick="window.open('https://youtube.com/@DRealDenzy', '_blank')">My YouTube</button>
+            <button id="colorBtn">Change Background Color</button>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Effects -->
+    <script>
+        // 1. Greeting alert
+        alert("Welcome to Obajuwon's Portfolio!");
+
+        // 2. Contact Me button
+        const contactBtn = document.getElementById('contactBtn');
+        contactBtn.addEventListener('click', function() {
+            window.location.href = "mailto:obajuwonmorayo@gmail.com";
+        });
+
+        // 3. Change background color button
+        const colorBtn = document.getElementById('colorBtn');
+        colorBtn.addEventListener('click', function() {
+            const colors = ["#f0f8ff", "#ffe4e1", "#e6f7ff", "#fffacd", "#f5f5dc"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        });
+
+        // 4. Show/Hide Skills card
+        const toggleBtn = document.getElementById('toggleSkillsBtn');
+        const skillsCard = document.querySelector('.card:nth-of-type(2)'); // second card = Skills
+        toggleBtn.addEventListener('click', function() {
+            if (skillsCard.style.display === "none") {
+                skillsCard.style.display = "block";
+            } else {
+                skillsCard.style.display = "none";
+            }
+        });
+    </script>
+<script>
+    const cards = document.querySelectorAll(".card");
+
+    function showCards() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+
+            if (cardTop < triggerBottom) {
+                card.classList.add("show");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", showCards);
+    showCards();
+</script>
+
+</body>
+</html>
